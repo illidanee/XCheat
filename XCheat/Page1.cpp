@@ -6,6 +6,7 @@
 #include "Page1.h"
 #include "afxdialogex.h"
 
+#include "CheatGame.h"
 
 // CPage1 dialog
 
@@ -28,7 +29,24 @@ void CPage1::DoDataExchange(CDataExchange* pDX)
 
 
 BEGIN_MESSAGE_MAP(CPage1, CDialogEx)
+	ON_BN_CLICKED(IDC_START, &CPage1::OnBnClickedStart)
+	ON_BN_CLICKED(IDC_STOP, &CPage1::OnBnClickedStop)
 END_MESSAGE_MAP()
 
 
 // CPage1 message handlers
+
+CCheatGame g_CheatGame;
+void CPage1::OnBnClickedStart()
+{
+	// TODO: Add your control notification handler code here
+
+	g_CheatGame.Init();
+}
+
+void CPage1::OnBnClickedStop()
+{
+	// TODO: Add your control notification handler code here
+
+	g_CheatGame.Done();
+}

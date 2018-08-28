@@ -61,8 +61,8 @@ void UIThread(void* pParam)
 {
 	AFX_MANAGE_STATE(AfxGetStaticModuleState());
 
-	HINSTANCE hOldIns = AfxGetResourceHandle();
-	AfxSetResourceHandle(theApp.m_hInstance);
+	//HINSTANCE hOldIns = AfxGetResourceHandle();
+	//AfxSetResourceHandle(theApp.m_hInstance);
 
 
 	CMainDlg* pMainDlg = new CMainDlg();
@@ -75,7 +75,7 @@ void UIThread(void* pParam)
 	g_hFreeThread = CreateThread(0, 0, (LPTHREAD_START_ROUTINE)FreeLibrary, theApp.m_hInstance, 0, 0);
 	CloseHandle(g_hFreeThread);
 
-	AfxSetResourceHandle(hOldIns);
+	//AfxSetResourceHandle(hOldIns);
 }
 
 BOOL CXCheatApp::InitInstance()
