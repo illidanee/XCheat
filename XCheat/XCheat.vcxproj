@@ -95,7 +95,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>Create</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -194,6 +194,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CheatGame.cpp" />
+    <ClCompile Include="Helpers.cpp" />
+    <ClCompile Include="Hooks.cpp" />
     <ClCompile Include="MainDlg.cpp" />
     <ClCompile Include="Page1.cpp" />
     <ClCompile Include="Page2.cpp" />
@@ -215,6 +217,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CheatGame.h" />
+    <ClInclude Include="Helpers.h" />
+    <ClInclude Include="Hooks.h" />
     <ClInclude Include="MainDlg.h" />
     <ClInclude Include="Page1.h" />
     <ClInclude Include="Page2.h" />

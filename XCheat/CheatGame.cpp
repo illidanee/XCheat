@@ -3,6 +3,13 @@
 
 #include <iostream>
 
+#include "Helpers.h"
+#include "Hooks.h"
+
+ID3D11Device*  pDevice;
+ID3D11DeviceContext * pContext;
+IDXGISwapChain * pSwapChain;
+
 CCheatGame::CCheatGame()
 {
 }
@@ -61,11 +68,21 @@ void CCheatGame::Init()
 	printf("pSwapChain:%X\n", pSwapChain);
 	printf("pDevice:%X\n", pDevice);
 	printf("pContext:%X\n", pContext);
+
+	DWORD_PTR** pSwapChainObj = reinterpret_cast<DWORD_PTR**>(pSwapChain);
+
+	DWORD_PTR* pSwapChainVT = pSwapChainObj[0];
+
+	Hooks::pD3DPresent = reinterpret_cast<Hooks::D3DPresent>(pSwapChainVT[8]);
+
+	CHelpers::HookFunction(reinterpret_cast<PVOID*>(&Hooks::pD3DPresent), Hooks::MyPresent);
 }
 
 
 void CCheatGame::Done()
 {
+	CHelpers::UnHookFunction(reinterpret_cast<PVOID*>(&Hooks::pD3DPresent), Hooks::MyPresent);
+
 	ShowWindow(GetConsoleWindow(), SW_HIDE);
 	FreeConsole();
 }

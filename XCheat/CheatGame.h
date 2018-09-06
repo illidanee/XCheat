@@ -10,10 +10,5 @@ public:
 
 	void Init();
 	void Done();
-
-private:
-	ID3D11Device*  pDevice;
-	ID3D11DeviceContext * pContext;
-	IDXGISwapChain * pSwapChain;
 };
 

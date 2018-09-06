@@ -7,7 +7,7 @@
 #include "afxdialogex.h"
 
 #include "CheatGame.h"
-#include "detours.h"
+#include "Helpers.h"
 
 // CPage1 dialog
 
@@ -86,20 +86,10 @@ void CPage1::OnBnClickedCheck1()
 
 	if (((CButton*)GetDlgItem(IDC_CHECK1))->GetCheck())
 	{
-		DetourTransactionBegin();
-		DetourUpdateThread(GetCurrentThread());
-
-		DetourAttach(&(PVOID&)Real_MessageBox, MyMessage);
-
-		DetourTransactionCommit();
+		CHelpers::HookFunction(&(PVOID&)Real_MessageBox, MyMessage);
 	}
 	else
 	{
-		DetourTransactionBegin();
-		DetourUpdateThread(GetCurrentThread());
-
-		DetourDetach(&(PVOID&)Real_MessageBox, MyMessage);
-
-		DetourTransactionCommit();
+		CHelpers::UnHookFunction(&(PVOID&)Real_MessageBox, MyMessage);
 	}
 }
