@@ -26,6 +26,9 @@
 
 *.vspx
 
+*.ipch
+*.pch
+
 .vs/*
 ipch/*
 bin/*
