@@ -95,7 +95,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Create</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -103,7 +103,8 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <ModuleDefinitionFile>.\XCheat.def</ModuleDefinitionFile>
-      <AdditionalDependencies>d3d11.lib;d3dcompiler.lib;detours.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;d3dcompiler.lib;detours.lib;mfc140ud.lib;mfcs140ud.lib;MSVCRTD.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/verbose:lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -193,6 +194,9 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\ImGui\imgui.cpp" />
+    <ClCompile Include="..\ImGui\imgui_draw.cpp" />
+    <ClCompile Include="..\ImGui\imgui_impl_dx11.cpp" />
     <ClCompile Include="CheatGame.cpp" />
     <ClCompile Include="Helpers.cpp" />
     <ClCompile Include="Hooks.cpp" />
@@ -206,6 +210,7 @@
     <ClCompile Include="Page7.cpp" />
     <ClCompile Include="Page8.cpp" />
     <ClCompile Include="Page9.cpp" />
+    <ClCompile Include="Render.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -216,6 +221,13 @@
     <ClCompile Include="XCheat.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\ImGui\imconfig.h" />
+    <ClInclude Include="..\ImGui\imgui.h" />
+    <ClInclude Include="..\ImGui\imgui_impl_dx11.h" />
+    <ClInclude Include="..\ImGui\imgui_internal.h" />
+    <ClInclude Include="..\ImGui\stb_rect_pack.h" />
+    <ClInclude Include="..\ImGui\stb_textedit.h" />
+    <ClInclude Include="..\ImGui\stb_truetype.h" />
     <ClInclude Include="CheatGame.h" />
     <ClInclude Include="Helpers.h" />
     <ClInclude Include="Hooks.h" />
@@ -229,6 +241,7 @@
     <ClInclude Include="Page7.h" />
     <ClInclude Include="Page8.h" />
     <ClInclude Include="Page9.h" />
+    <ClInclude Include="Render.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TabSheet.h" />

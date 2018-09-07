@@ -14,7 +14,7 @@ namespace Hooks
 			bInit = true;
 		}
 
-		printf("11111111111111111111111111111\n");
+		//printf("11111111111111111111111111111\n");
 
 		return pD3DPresent(pSwapChain, SyncInterval, Flags);
 	}

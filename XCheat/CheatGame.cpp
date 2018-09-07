@@ -5,6 +5,7 @@
 
 #include "Helpers.h"
 #include "Hooks.h"
+#include "Render.h"
 
 ID3D11Device*  pDevice;
 ID3D11DeviceContext * pContext;
@@ -74,6 +75,8 @@ void CCheatGame::Init()
 	DWORD_PTR* pSwapChainVT = pSwapChainObj[0];
 
 	Hooks::pD3DPresent = reinterpret_cast<Hooks::D3DPresent>(pSwapChainVT[8]);
+
+	Render::GetInstance().Init();
 
 	CHelpers::HookFunction(reinterpret_cast<PVOID*>(&Hooks::pD3DPresent), Hooks::MyPresent);
 }
