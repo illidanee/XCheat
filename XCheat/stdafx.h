@@ -37,4 +37,12 @@
 #endif // _AFX_NO_AFXCMN_SUPPORT
 #include <afxcontrolbars.h>
 
+#include <sstream>
+#include <iostream>
 
+#include <d3d11.h>
+#include <D3Dcompiler.h>
+
+#include "../ImGui/imgui.h"
+#include "../ImGui/imgui_internal.h"
+#include "../ImGui/imgui_impl_dx11.h"

@@ -1,15 +1,17 @@
 #include "stdafx.h"
 #include "CheatGame.h"
 
-#include <iostream>
-
 #include "Helpers.h"
 #include "Hooks.h"
 #include "Render.h"
 
-ID3D11Device*  pDevice;
-ID3D11DeviceContext * pContext;
-IDXGISwapChain * pSwapChain;
+#include "UserInterface.h"
+#include "Input.h"
+
+ID3D11Device*				g_pDevice;
+ID3D11DeviceContext*		g_pContext;
+IDXGISwapChain*				g_pSwapChain;
+ID3D11RenderTargetView*		g_pRenderTargetView;
 
 CCheatGame::CCheatGame()
 {
@@ -60,31 +62,35 @@ void CCheatGame::Init()
 		1,
 		D3D11_SDK_VERSION,
 		&scd,
-		&pSwapChain,
-		&pDevice,
+		&g_pSwapChain,
+		&g_pDevice,
 		NULL,
-		&pContext
+		&g_pContext
 	);
 
-	printf("pSwapChain:%X\n", pSwapChain);
-	printf("pDevice:%X\n", pDevice);
-	printf("pContext:%X\n", pContext);
+	printf("pSwapChain:%X\n", g_pSwapChain);
+	printf("pDevice:%X\n", g_pDevice);
+	printf("pContext:%X\n", g_pContext);
 
-	DWORD_PTR** pSwapChainObj = reinterpret_cast<DWORD_PTR**>(pSwapChain);
+	DWORD_PTR** pSwapChainObj = reinterpret_cast<DWORD_PTR**>(g_pSwapChain);
 
 	DWORD_PTR* pSwapChainVT = pSwapChainObj[0];
 
-	Hooks::pD3DPresent = reinterpret_cast<Hooks::D3DPresent>(pSwapChainVT[8]);
+	Hooks::g_pD3DPresent = reinterpret_cast<Hooks::D3DPresent>(pSwapChainVT[8]);
 
 	Render::GetInstance().Init();
+	UserInterface::GetInstance()->SetStyle();
+	Input::GetInstance()->StartThread();
 
-	CHelpers::HookFunction(reinterpret_cast<PVOID*>(&Hooks::pD3DPresent), Hooks::MyPresent);
+	CHelpers::HookFunction(reinterpret_cast<PVOID*>(&Hooks::g_pD3DPresent), Hooks::MyPresent);
 }
 
 
 void CCheatGame::Done()
 {
-	CHelpers::UnHookFunction(reinterpret_cast<PVOID*>(&Hooks::pD3DPresent), Hooks::MyPresent);
+	CHelpers::UnHookFunction(reinterpret_cast<PVOID*>(&Hooks::g_pD3DPresent), Hooks::MyPresent);
+
+	Input::GetInstance()->StopThread();
 
 	ShowWindow(GetConsoleWindow(), SW_HIDE);
 	FreeConsole();

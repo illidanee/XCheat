@@ -200,6 +200,7 @@
     <ClCompile Include="CheatGame.cpp" />
     <ClCompile Include="Helpers.cpp" />
     <ClCompile Include="Hooks.cpp" />
+    <ClCompile Include="Input.cpp" />
     <ClCompile Include="MainDlg.cpp" />
     <ClCompile Include="Page1.cpp" />
     <ClCompile Include="Page2.cpp" />
@@ -211,6 +212,7 @@
     <ClCompile Include="Page8.cpp" />
     <ClCompile Include="Page9.cpp" />
     <ClCompile Include="Render.cpp" />
+    <ClCompile Include="Settings.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -218,6 +220,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="TabSheet.cpp" />
+    <ClCompile Include="UserInterface.cpp" />
     <ClCompile Include="XCheat.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -231,6 +234,7 @@
     <ClInclude Include="CheatGame.h" />
     <ClInclude Include="Helpers.h" />
     <ClInclude Include="Hooks.h" />
+    <ClInclude Include="Input.h" />
     <ClInclude Include="MainDlg.h" />
     <ClInclude Include="Page1.h" />
     <ClInclude Include="Page2.h" />
@@ -243,10 +247,13 @@
     <ClInclude Include="Page9.h" />
     <ClInclude Include="Render.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="Settings.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TabSheet.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="UserInterface.h" />
     <ClInclude Include="XCheat.h" />
+    <ClInclude Include="XorStr.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\XCheat.rc2" />

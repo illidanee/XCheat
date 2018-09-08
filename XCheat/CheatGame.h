@@ -1,6 +1,9 @@
 #pragma once
-#include <D3D11.h>
-#include <D3Dcompiler.h>
+
+extern ID3D11Device*				g_pDevice;
+extern ID3D11DeviceContext*			g_pContext;
+extern IDXGISwapChain*				g_pSwapChain;
+extern ID3D11RenderTargetView*		g_pRenderTargetView;
 
 class CCheatGame
 {
