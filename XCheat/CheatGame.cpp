@@ -73,22 +73,27 @@ void CCheatGame::Init()
 	printf("pContext:%X\n", g_pContext);
 
 	DWORD_PTR** pSwapChainObj = reinterpret_cast<DWORD_PTR**>(g_pSwapChain);
+	DWORD_PTR** pContextObj = reinterpret_cast<DWORD_PTR**>(g_pContext);
 
 	DWORD_PTR* pSwapChainVT = pSwapChainObj[0];
+	DWORD_PTR* pContextVT = pContextObj[0];
 
 	Hooks::g_pD3DPresent = reinterpret_cast<Hooks::D3DPresent>(pSwapChainVT[8]);
+	Hooks::g_pD3DDrawIndexed = reinterpret_cast<Hooks::D3DDrawIndexed>(pContextVT[12]);
 
 	Render::GetInstance().Init();
 	UserInterface::GetInstance()->SetStyle();
 	Input::GetInstance()->StartThread();
 
 	CHelpers::HookFunction(reinterpret_cast<PVOID*>(&Hooks::g_pD3DPresent), Hooks::MyPresent);
+	CHelpers::HookFunction(reinterpret_cast<PVOID*>(&Hooks::g_pD3DDrawIndexed), Hooks::MyDrawIndexed);
 }
 
 
 void CCheatGame::Done()
 {
 	CHelpers::UnHookFunction(reinterpret_cast<PVOID*>(&Hooks::g_pD3DPresent), Hooks::MyPresent);
+	CHelpers::UnHookFunction(reinterpret_cast<PVOID*>(&Hooks::g_pD3DDrawIndexed), Hooks::MyDrawIndexed);
 
 	Input::GetInstance()->StopThread();
 

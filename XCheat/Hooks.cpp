@@ -5,6 +5,8 @@
 namespace Hooks
 {
 	D3DPresent g_pD3DPresent = nullptr;
+	D3DDrawIndexed g_pD3DDrawIndexed = nullptr;
+
 	bool g_bInit = false;
 	bool g_bShowWindow = true;
 	bool g_bClose_ZEnable = false;
@@ -80,4 +82,19 @@ namespace Hooks
 		return g_pD3DPresent(pSwapChain, SyncInterval, Flags);
 	}
 
+	void __stdcall MyDrawIndexed(ID3D11DeviceContext* pContext, UINT IndexCount, UINT StartIndexLocation, INT BaseVertexLocation)
+	{
+		UINT Stride = 0;
+		ID3D11Buffer* veBuffer;
+		UINT veBufferOffset = 0;
+		pContext->IAGetVertexBuffers(0, 1, &veBuffer, &Stride, &veBufferOffset);
+
+		//printf("%d\n", Stride);
+		if (Stride == 40)
+		{
+			return;
+		}
+
+		return g_pD3DDrawIndexed(pContext, IndexCount, StartIndexLocation, BaseVertexLocation);
+	}
 }
