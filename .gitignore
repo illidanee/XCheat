@@ -45,4 +45,7 @@ U3DPluginForAndroid/x64/*
 TestPlugin/Library/*
 TestPlugin/Temp/*
 
+XCheat/Debug/*
+XCheat/Release/*
+
 *.log__*
